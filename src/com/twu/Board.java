@@ -10,14 +10,14 @@ import java.util.List;
 public class Board {
 
     private PrintStream out;
-    protected final List<Integer> gameBoard = new ArrayList<Integer>();
+    protected final List<Player> gameBoard = new ArrayList<Player>();
     private final int[][] winConditions = new int[][] {
             {1,2,3},{1,4,7},{7,8,9},{3,6,9},{1,5,9},{3,5,7},{4,5,6},{2,5,8}
     };
 
     private void setUpGameBoard(){
         for(int i=0; i<=9; i++) {
-            gameBoard.add(0);
+            gameBoard.add(null);
         }
     }
 
@@ -26,12 +26,12 @@ public class Board {
         setUpGameBoard();
     }
 
-    private String getPieceSymbol(int i){
-        if(i==0){
+    private String getPieceSymbol(Player player){
+        if(player == null){
             return " ";
-        } else if (i==1) {
+        } else if (player.getPlayerNum() ==1) {
             return "X";
-        } else if (i==2) {
+        } else if (player.getPlayerNum() ==2) {
             return "O";
         }
 
@@ -48,18 +48,18 @@ public class Board {
         );
     }
 
-    public boolean setPiece(int position, int playerNum) {
-        if(gameBoard.get(position)!=0){
+    public boolean setPiece(int position, Player player) {
+        if(gameBoard.get(position)!=null){
             return false;
         }
-        gameBoard.set(position,playerNum);
+        gameBoard.set(position, player);
         return true;
     }
 
     public Boolean boardIsFull() {
 
         for(int i = 1; i<=9; i++){
-            if(gameBoard.get(i) == 0){
+            if(gameBoard.get(i) == null){
                 return false;
             }
         }
@@ -68,7 +68,7 @@ public class Board {
 
     public Boolean gameIsWon() {
         for(int i=0; i<winConditions.length; i++){
-            if( gameBoard.get(winConditions[i][0]) != 0 &&
+            if( gameBoard.get(winConditions[i][0]) != null &&
                 gameBoard.get(winConditions[i][0]) == gameBoard.get(winConditions[i][1]) &&
                 gameBoard.get(winConditions[i][1]) == gameBoard.get(winConditions[i][2])){
                     return true;

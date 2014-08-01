@@ -11,16 +11,25 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BoardTest {
 
     private PrintStream out;
     private GameDriver driver;
     private Board board;
+    private Player player1;
+    private Player player2;
 
     @Before
     public void setUp(){
         out = mock(PrintStream.class);
+        player1 = mock(Player.class);
+        player2 = mock(Player.class);
+
+        when(player1.getPlayerNum()).thenReturn(1);
+        when(player2.getPlayerNum()).thenReturn(2);
+
         board = new Board(out);
     }
 
@@ -41,13 +50,13 @@ public class BoardTest {
     @Test
     public void shouldSetBoardPosition5To1IfSetPieceIsCalledWith5And1(){
 
-        board.setPiece(5, 1);
-        assertThat(board.gameBoard.get(5),is(1));
+        board.setPiece(5, player1);
+        assertThat(board.gameBoard.get(5),is(player1));
     }
 
     @Test
     public void shouldDrawAnXInTopRightWhenBoardPosition3IsSetTo1(){
-        board.gameBoard.set(3, 1);
+        board.gameBoard.set(3, player1);
         board.printBoard();
 
         verify(out).print(
@@ -61,7 +70,7 @@ public class BoardTest {
 
     @Test
     public void shouldDrawAnOInTopLeftWhenBoardPosition1IsSetTo2(){
-        board.gameBoard.set(1, 2);
+        board.gameBoard.set(1, player2);
         board.printBoard();
 
         verify(out).print(
@@ -75,8 +84,8 @@ public class BoardTest {
 
     @Test
     public void shouldGetFalseIfInputPositionAlreadyTaken(){
-        board.gameBoard.set(3,1);
-        assertThat(board.setPiece(3,1),is(false));
+        board.gameBoard.set(3,player1);
+        assertThat(board.setPiece(3,player1),is(false));
     }
 
     @Test
@@ -87,7 +96,7 @@ public class BoardTest {
     @Test
     public void shouldReturnTrueIfBoardIsFullWhenCallingBoardIsFull(){
         for(int i=0; i<=9; i++){
-            board.gameBoard.set(i,1);
+            board.gameBoard.set(i,player1);
         }
 
         assertThat(board.boardIsFull(),is(true));
@@ -100,18 +109,18 @@ public class BoardTest {
 
     @Test
     public void shouldReturnTrueWhenGameIsWonCalledAndPosition123IsSetTo1(){
-        board.gameBoard.set(1,1);
-        board.gameBoard.set(2,1);
-        board.gameBoard.set(3,1);
+        board.gameBoard.set(1,player1);
+        board.gameBoard.set(2,player1);
+        board.gameBoard.set(3,player1);
 
         assertThat(board.gameIsWon(), is(true));
     }
 
     @Test
     public void shouldReturnTrueWhenGameIsWonCalledAndPosition519IsSetTo2(){
-        board.gameBoard.set(5,2);
-        board.gameBoard.set(1,2);
-        board.gameBoard.set(9,2);
+        board.gameBoard.set(5,player2);
+        board.gameBoard.set(1,player2);
+        board.gameBoard.set(9,player2);
 
         assertThat(board.gameIsWon(), is(true));
     }

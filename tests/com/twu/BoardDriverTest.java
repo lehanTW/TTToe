@@ -19,11 +19,13 @@ public class BoardDriverTest {
     private GameDriver driver;
     private PrintStream out;
     private InputStream in;
+    private Player player;
 
     @Before
     public void setUp(){
         out = mock(PrintStream.class);
         in = mock(InputStream.class);
+        player = mock(Player.class);
         driver = new GameDriver(out,in);
     }
 
@@ -36,7 +38,7 @@ public class BoardDriverTest {
     @Test
     public void shouldPrintGameDrawMessageWhenBoardIsFull(){
         for(int i=0; i<=9; i++){
-            driver.board.gameBoard.set(i,1);
+            driver.board.gameBoard.set(i,player);
         }
         driver.play();
         verify(out).println("Game is a draw!");

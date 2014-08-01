@@ -50,11 +50,11 @@ public class GameDriver {
             out.print("Player "+playersTurn+" make a move: ");
             String userInput = getUserInput(in);
 
-            while(!board.setPiece(Integer.parseInt(userInput), playersTurn)){
+            /*while(!board.setPiece(Integer.parseInt(userInput), playersTurn)){
                 out.println("Location Already Taken!");
                 out.print("Player "+playersTurn+" make a move: ");
                 userInput = getUserInput(in);
-            }
+            }*/
         }
 
         if(board.boardIsFull()){

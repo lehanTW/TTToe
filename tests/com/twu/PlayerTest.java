@@ -5,7 +5,10 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -22,13 +25,18 @@ public class PlayerTest {
     public void setUp(){
         out = mock(PrintStream.class);
         board = mock(Board.class);
-        player = new Player(board, "1");
+        player = new Player(board, 1);
+    }
+
+    @Test
+    public void shouldReturn1WhenPlayerNumIs1(){
+        assertThat(player.getPlayerNum(), is(1));
     }
 
     @Test
     public void shouldSetBoardPieceWhenPlayerTakesTurn(){
         player.takeTurn(1);
-        verify(board).setPiece(anyInt(),anyInt());
+        verify(board).setPiece(anyInt(),(Player)anyObject());
     }
 
 }
