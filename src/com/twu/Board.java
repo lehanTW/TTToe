@@ -69,8 +69,8 @@ public class Board {
     public Boolean gameIsWon() {
         for(int i=0; i<winConditions.length; i++){
             if( gameBoard.get(winConditions[i][0]) != null &&
-                gameBoard.get(winConditions[i][0]) == gameBoard.get(winConditions[i][1]) &&
-                gameBoard.get(winConditions[i][1]) == gameBoard.get(winConditions[i][2])){
+                gameBoard.get(winConditions[i][0]).equals(gameBoard.get(winConditions[i][1])) &&
+                gameBoard.get(winConditions[i][1]).equals(gameBoard.get(winConditions[i][2]))){
                     return true;
             }
         }

@@ -9,25 +9,27 @@ public class GameDriver {
 
     protected Board board;
     private PrintStream out;
-    private InputStream in;
+    private BufferedReader reader;
+    private Player player1;
+    private Player player2;
 
-    public GameDriver(PrintStream out, InputStream in){
-        board = new Board(out);
+    public GameDriver(PrintStream out, BufferedReader reader, Board board, Player player1, Player player2){
+        this.board = board;
         this.out = out;
-        this.in = in;
-
+        this.reader = reader;
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
-    public String getUserInput(InputStream in) {
+    public String getUserInput() {
         String inputLn = "";
         try{
-            BufferedReader is = new BufferedReader(new InputStreamReader(in));
-            inputLn = is.readLine();
+            inputLn = reader.readLine();
             if(inputLn.length() == 0){
                 return null;
             }
         } catch (IOException e){
-            System.out.println("IOException: "+e);
+            out.println("IOException: "+e);
         }
 
         return inputLn;
@@ -35,26 +37,26 @@ public class GameDriver {
 
     public void play(){
 
-        int turn = 0;
-        int playersTurn = 0;
-        while(!board.boardIsFull()){
-            turn++;
+        boolean player1Turn = true;
 
-            if(turn%2 == 1){
-                playersTurn = 1;
-            } else if (turn%2 == 0) {
-                playersTurn = 2;
+        while(!board.boardIsFull()){
+            Player currentPlayer;
+
+            if(player1Turn){
+                currentPlayer = player1;
+            } else {
+                currentPlayer = player2;
             }
 
             board.printBoard();
-            out.print("Player "+playersTurn+" make a move: ");
-            String userInput = getUserInput(in);
+            out.print("Player "+currentPlayer.getPlayerNum()+" make a move: ");
+            String userInput = getUserInput();
 
-            /*while(!board.setPiece(Integer.parseInt(userInput), playersTurn)){
+            while(!board.setPiece(Integer.parseInt(userInput), currentPlayer)){
                 out.println("Location Already Taken!");
-                out.print("Player "+playersTurn+" make a move: ");
-                userInput = getUserInput(in);
-            }*/
+                out.print("Player "+currentPlayer.getPlayerNum()+" make a move: ");
+                userInput = getUserInput();
+            }
         }
 
         if(board.boardIsFull()){
