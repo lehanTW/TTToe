@@ -57,6 +57,8 @@ public class GameDriver {
                 out.print("Player "+currentPlayer.getPlayerNum()+" make a move: ");
                 userInput = getUserInput();
             }
+
+            player1Turn = !player1Turn;
         }
 
         if(board.boardIsFull()){
