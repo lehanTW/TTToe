@@ -18,6 +18,7 @@ public class GameTest {
     private Player player2;
     private Board board;
     private BufferedReader reader;
+    private IOHandler handler;
 
     @Before
     public void setUp(){
@@ -26,22 +27,16 @@ public class GameTest {
         player1 = mock(Player.class);
         player2 = mock(Player.class);
         board = mock(Board.class);
-        reader = mock(BufferedReader.class);
-        game = new Game(out,reader,board,player1,player2);
-    }
-
-    @Test
-    public void shouldReturn5WhenUserInputs5() throws IOException {
-        when(reader.readLine()).thenReturn("5");
-
-        assertThat(game.getUserInput(), is("5"));
+        handler = mock(IOHandler.class);
+        game = new Game(handler, board,player1,player2);
     }
 
     @Test
     public void shouldPlayAtPosition1WhenPlayer1Plays1() throws IOException {
 
-        when(reader.readLine()).thenReturn("1");
+        when(handler.getUserInput()).thenReturn("1");
         when(board.boardIsFull()).thenReturn(false, true);
+        when(player1.takeTurn(anyInt())).thenReturn(true);
 
         game.play();
 
@@ -51,14 +46,14 @@ public class GameTest {
 
     @Test
     public void shouldPrintGameDrawMessageWhenBoardIsFull(){
-        game = new Game(out, new BufferedReader(new InputStreamReader(in)),new Board(out),player1,player2);
+        game = new Game(handler, new Board(out),player1,player2);
 
         for(int i=0; i<=9; i++){
             game.board.gameBoard.set(i,player1);
         }
 
         game.play();
-        verify(out).println("Game is a draw!");
+        verify(handler).println("Game is a draw!");
     }
 
 }

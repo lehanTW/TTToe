@@ -10,8 +10,9 @@ public class Main {
         Board board = new Board(System.out);
         Player player1 = new Player(board,"X");
         Player player2 = new Player(board,"O");
+        IOHandler handler = new IOHandler(new BufferedReader(new InputStreamReader(System.in)), System.out);
 
-        Game driver = new Game(System.out, new BufferedReader(new InputStreamReader(System.in)),board, player1, player2);
+        Game driver = new Game(handler, board, player1, player2);
         driver.play();
     }
 }

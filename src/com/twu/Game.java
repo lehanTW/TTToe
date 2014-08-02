@@ -8,31 +8,19 @@ import java.io.*;
 public class Game {
 
     protected Board board;
-    private PrintStream out;
-    private BufferedReader reader;
     private Player player1;
     private Player player2;
+    private IOHandler handler;
 
-    public Game(PrintStream out, BufferedReader reader, Board board, Player player1, Player player2){
+    public Game(IOHandler handler, Board board, Player player1, Player player2){
         this.board = board;
-        this.out = out;
-        this.reader = reader;
+        this.handler = handler;
         this.player1 = player1;
         this.player2 = player2;
     }
 
     public String getUserInput() {
-        String inputLn = "";
-        try{
-            inputLn = reader.readLine();
-            if(inputLn.length() == 0){
-                return null;
-            }
-        } catch (IOException e){
-            out.println("IOException: "+e);
-        }
-
-        return inputLn;
+        return handler.getUserInput();
     }
 
     public void play(){
@@ -52,25 +40,25 @@ public class Game {
             }
 
             board.printBoard();
-            out.print("Player "+playerNum+" make a move: ");
+            handler.print("Player " + playerNum + " make a move: ");
             String userInput = getUserInput();
 
             while(!currentPlayer.takeTurn(Integer.parseInt(userInput))){
-                out.println("Location Already Taken!");
-                out.print("Player "+playerNum+" make a move: ");
+                handler.println("Location Already Taken!");
+                handler.print("Player " + playerNum + " make a move: ");
                 userInput = getUserInput();
             }
 
             if(board.gameIsWon()){
                 board.printBoard();
-                out.println("Player "+playerNum+" Wins!");
+                handler.println("Player " + playerNum + " Wins!");
                 return;
             }
 
             player1Turn = !player1Turn;
         }
 
-        out.println("Game is a draw!");
+        handler.println("Game is a draw!");
 
     }
 
