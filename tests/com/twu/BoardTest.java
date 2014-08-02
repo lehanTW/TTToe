@@ -1,7 +1,5 @@
 package com.twu;
 
-import com.twu.Board;
-import com.twu.GameDriver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +14,7 @@ import static org.mockito.Mockito.when;
 public class BoardTest {
 
     private PrintStream out;
-    private GameDriver driver;
+    private Game driver;
     private Board board;
     private Player player1;
     private Player player2;
@@ -27,8 +25,8 @@ public class BoardTest {
         player1 = mock(Player.class);
         player2 = mock(Player.class);
 
-        when(player1.getPlayerNum()).thenReturn(1);
-        when(player2.getPlayerNum()).thenReturn(2);
+        when(player1.getPlayerMarker()).thenReturn("X");
+        when(player2.getPlayerMarker()).thenReturn("O");
 
         board = new Board(out);
     }
@@ -49,8 +47,7 @@ public class BoardTest {
 
     @Test
     public void shouldSetBoardPosition5To1IfSetPieceIsCalledWith5And1(){
-
-        board.setPiece(5, player1);
+        assertThat(board.setPiece(5, player1), is(true));
         assertThat(board.gameBoard.get(5),is(player1));
     }
 

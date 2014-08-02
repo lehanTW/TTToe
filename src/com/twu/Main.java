@@ -8,10 +8,10 @@ public class Main {
     public static void main(String[] args) {
 
         Board board = new Board(System.out);
-        Player player1 = new Player(board,1);
-        Player player2 = new Player(board,2);
+        Player player1 = new Player(board,"X");
+        Player player2 = new Player(board,"O");
 
-        GameDriver driver = new GameDriver(System.out, new BufferedReader(new InputStreamReader(System.in)),board, player1, player2);
+        Game driver = new Game(System.out, new BufferedReader(new InputStreamReader(System.in)),board, player1, player2);
         driver.play();
     }
 }

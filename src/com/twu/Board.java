@@ -26,25 +26,20 @@ public class Board {
         setUpGameBoard();
     }
 
-    private String getPieceSymbol(Player player){
+    private String resolveSymbol(Player player){
         if(player == null){
             return " ";
-        } else if (player.getPlayerNum() ==1) {
-            return "X";
-        } else if (player.getPlayerNum() ==2) {
-            return "O";
         }
-
-        return "";
+        return player.getPlayerMarker();
     }
 
     public void printBoard(){
         out.print(
-                " "+getPieceSymbol(gameBoard.get(1))+" | "+getPieceSymbol(gameBoard.get(2))+" | "+getPieceSymbol(gameBoard.get(3))+" \n" +
+                " "+ resolveSymbol(gameBoard.get(1))+" | "+ resolveSymbol(gameBoard.get(2))+" | "+ resolveSymbol(gameBoard.get(3))+" \n" +
                 "-----------\n" +
-                " "+getPieceSymbol(gameBoard.get(4))+" | "+getPieceSymbol(gameBoard.get(5))+" | "+getPieceSymbol(gameBoard.get(6))+" \n" +
+                " "+ resolveSymbol(gameBoard.get(4))+" | "+ resolveSymbol(gameBoard.get(5))+" | "+ resolveSymbol(gameBoard.get(6))+" \n" +
                 "-----------\n" +
-                " "+getPieceSymbol(gameBoard.get(7))+" | "+getPieceSymbol(gameBoard.get(8))+" | "+getPieceSymbol(gameBoard.get(9))+" \n"
+                " "+ resolveSymbol(gameBoard.get(7))+" | "+ resolveSymbol(gameBoard.get(8))+" | "+ resolveSymbol(gameBoard.get(9))+" \n"
         );
     }
 

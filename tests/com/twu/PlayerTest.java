@@ -25,18 +25,18 @@ public class PlayerTest {
     public void setUp(){
         out = mock(PrintStream.class);
         board = mock(Board.class);
-        player = new Player(board, 1);
+        player = new Player(board, "X");
     }
 
     @Test
-    public void shouldReturn1WhenPlayerNumIs1(){
-        assertThat(player.getPlayerNum(), is(1));
+    public void shouldReturnXWhenPlayerMarkerIsX(){
+        assertThat(player.getPlayerMarker(), is("X"));
     }
 
     @Test
     public void shouldSetBoardPieceWhenPlayerTakesTurn(){
         player.takeTurn(1);
-        verify(board).setPiece(anyInt(),(Player)anyObject());
+        verify(board).setPiece(1,player);
     }
 
 }

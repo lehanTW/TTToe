@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Created by hanlei on 7/30/14.
  */
-public class GameDriver {
+public class Game {
 
     protected Board board;
     private PrintStream out;
@@ -13,7 +13,7 @@ public class GameDriver {
     private Player player1;
     private Player player2;
 
-    public GameDriver(PrintStream out, BufferedReader reader, Board board, Player player1, Player player2){
+    public Game(PrintStream out, BufferedReader reader, Board board, Player player1, Player player2){
         this.board = board;
         this.out = out;
         this.reader = reader;
@@ -41,30 +41,36 @@ public class GameDriver {
 
         while(!board.boardIsFull()){
             Player currentPlayer;
+            int playerNum = 1;
 
             if(player1Turn){
                 currentPlayer = player1;
+                playerNum = 1;
             } else {
                 currentPlayer = player2;
+                playerNum = 2;
             }
 
             board.printBoard();
-            out.print("Player "+currentPlayer.getPlayerNum()+" make a move: ");
+            out.print("Player "+playerNum+" make a move: ");
             String userInput = getUserInput();
 
-            while(!board.setPiece(Integer.parseInt(userInput), currentPlayer)){
+            while(!currentPlayer.takeTurn(Integer.parseInt(userInput))){
                 out.println("Location Already Taken!");
-                out.print("Player "+currentPlayer.getPlayerNum()+" make a move: ");
+                out.print("Player "+playerNum+" make a move: ");
                 userInput = getUserInput();
+            }
+
+            if(board.gameIsWon()){
+                board.printBoard();
+                out.println("Player "+playerNum+" Wins!");
+                return;
             }
 
             player1Turn = !player1Turn;
         }
 
-        if(board.boardIsFull()){
-            board.printBoard();
-            out.println("Game is a draw!");
-        }
+        out.println("Game is a draw!");
 
     }
 

@@ -5,19 +5,19 @@ package com.twu;
  */
 public class Player {
 
-    private int playerNum;
+    private String playerMarker;
     private Board board;
 
-    public Player(Board board, int playerNum) {
+    public Player(Board board, String playerName) {
         this.board = board;
-        this.playerNum = playerNum;
+        this.playerMarker = playerName;
     }
 
-    public void takeTurn(int position) {
-        board.setPiece(position,this);
+    public boolean takeTurn(int position) {
+        return board.setPiece(position,this);
     }
 
-    public int getPlayerNum() {
-        return playerNum;
+    public String getPlayerMarker() {
+        return playerMarker;
     }
 }
