@@ -12,17 +12,17 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class IOHandlerTest {
+public class InputHandlerTest {
 
     private BufferedReader reader;
     private PrintStream out;
-    private IOHandler handler;
+    private InputHandler handler;
 
     @Before
     public void setUp(){
         reader = mock(BufferedReader.class);
         out = mock(PrintStream.class);
-        handler = new IOHandler(reader, out);
+        handler = new InputHandler(reader);
     }
 
     @Test

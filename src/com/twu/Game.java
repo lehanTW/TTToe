@@ -10,13 +10,15 @@ public class Game {
     protected Board board;
     private Player player1;
     private Player player2;
-    private IOHandler handler;
+    private InputHandler handler;
+    private PrintStream out;
 
-    public Game(IOHandler handler, Board board, Player player1, Player player2){
+    public Game(InputHandler handler, PrintStream out, Board board, Player player1, Player player2){
         this.board = board;
         this.handler = handler;
         this.player1 = player1;
         this.player2 = player2;
+        this.out = out;
     }
 
     public String getUserInput() {
@@ -40,25 +42,25 @@ public class Game {
             }
 
             board.printBoard();
-            handler.print("Player " + playerNum + " make a move: ");
+            out.print("Player " + playerNum + " make a move: ");
             String userInput = getUserInput();
 
             while(!currentPlayer.takeTurn(Integer.parseInt(userInput))){
-                handler.println("Location Already Taken!");
-                handler.print("Player " + playerNum + " make a move: ");
+                out.println("Location Already Taken!");
+                out.print("Player " + playerNum + " make a move: ");
                 userInput = getUserInput();
             }
 
             if(board.gameIsWon()){
                 board.printBoard();
-                handler.println("Player " + playerNum + " Wins!");
+                out.println("Player " + playerNum + " Wins!");
                 return;
             }
 
             player1Turn = !player1Turn;
         }
 
-        handler.println("Game is a draw!");
+        out.println("Game is a draw!");
 
     }
 

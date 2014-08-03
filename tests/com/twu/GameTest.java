@@ -18,7 +18,7 @@ public class GameTest {
     private Player player2;
     private Board board;
     private BufferedReader reader;
-    private IOHandler handler;
+    private InputHandler handler;
 
     @Before
     public void setUp(){
@@ -27,8 +27,8 @@ public class GameTest {
         player1 = mock(Player.class);
         player2 = mock(Player.class);
         board = mock(Board.class);
-        handler = mock(IOHandler.class);
-        game = new Game(handler, board,player1,player2);
+        handler = mock(InputHandler.class);
+        game = new Game(handler, out, board,player1,player2);
     }
 
     @Test
@@ -46,14 +46,14 @@ public class GameTest {
 
     @Test
     public void shouldPrintGameDrawMessageWhenBoardIsFull(){
-        game = new Game(handler, new Board(out),player1,player2);
+        game = new Game(handler, out, new Board(out),player1,player2);
 
         for(int i=0; i<=9; i++){
             game.board.gameBoard.set(i,player1);
         }
 
         game.play();
-        verify(handler).println("Game is a draw!");
+        verify(out).println("Game is a draw!");
     }
 
 }

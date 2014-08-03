@@ -8,9 +8,9 @@ public class Player {
     private String playerMarker;
     private Board board;
 
-    public Player(Board board, String playerName) {
+    public Player(Board board, String playerMarker) {
         this.board = board;
-        this.playerMarker = playerName;
+        this.playerMarker = playerMarker;
     }
 
     public boolean takeTurn(int position) {

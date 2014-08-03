@@ -8,15 +8,13 @@ import java.io.PrintStream;
 /**
  * Created by hanlei on 8/2/14.
  */
-public class IOHandler {
+public class InputHandler {
 
 
     private BufferedReader reader;
-    private PrintStream out;
 
-    public IOHandler(BufferedReader reader, PrintStream out) {
+    public InputHandler(BufferedReader reader) {
         this.reader = reader;
-        this.out = out;
     }
 
     public String getUserInput() {
@@ -27,16 +25,8 @@ public class IOHandler {
                 return null;
             }
         } catch (IOException e) {
-            out.println("IOException: " + e);
+            System.out.println("IOException: " + e);
         }
         return inputLn;
-    }
-
-    public void print(String str){
-        this.out.print(str);
-    }
-
-    public void println(String str){
-        this.out.println(str);
     }
 }

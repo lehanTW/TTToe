@@ -11,7 +11,7 @@ public class Board {
 
     private PrintStream out;
     protected final List<Player> gameBoard = new ArrayList<Player>();
-    private final int[][] winConditions = new int[][] {
+    protected final int[][] winConditions = new int[][] {
             {1,2,3},{1,4,7},{7,8,9},{3,6,9},{1,5,9},{3,5,7},{4,5,6},{2,5,8}
     };
 

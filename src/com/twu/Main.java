@@ -10,9 +10,13 @@ public class Main {
         Board board = new Board(System.out);
         Player player1 = new Player(board,"X");
         Player player2 = new Player(board,"O");
-        IOHandler handler = new IOHandler(new BufferedReader(new InputStreamReader(System.in)), System.out);
+        Decider decider = new Decider(board);
+        AIPlayer aiPlayer1 = new AIPlayer(board,"X",decider);
+        AIPlayer aiPlayer2 = new AIPlayer(board,"O",decider);
 
-        Game driver = new Game(handler, board, player1, player2);
+        InputHandler handler = new InputHandler(new BufferedReader(new InputStreamReader(System.in)));
+
+        Game driver = new Game(handler, System.out, board, player1, player2);
         driver.play();
     }
 }
