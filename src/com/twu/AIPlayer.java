@@ -13,6 +13,16 @@ public class AIPlayer extends Player {
         this.decider = decider;
     }
 
+    public boolean takeTurn(){
+        int positionToPlay = -1;
 
+        positionToPlay = decider.goForWin(this);
+
+        if(positionToPlay < 1){
+            positionToPlay = decider.blockOpponent(this);
+        }
+
+        return super.takeTurn(positionToPlay);
+    }
 
 }

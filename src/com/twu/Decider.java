@@ -25,12 +25,11 @@ public class Decider {
 
     public int goForWin(AIPlayer aiPlayer) {
         int positionToPlay = -1;
-
         for(int i=0; i<board.winConditions.length; i++){
             for(int j=0; j<board.winConditions[i].length; j++){
                 if(
                     board.gameBoard.get(board.winConditions[i][(j+1) % board.winConditions[i].length]) ==
-                            board.gameBoard.get(board.winConditions[i][(j+2)%3]) &&
+                            board.gameBoard.get(board.winConditions[i][(j+2)%board.winConditions[i].length]) &&
 
                     board.gameBoard.get(board.winConditions[i][(j+1) % board.winConditions[i].length]) ==
                             aiPlayer
@@ -43,7 +42,25 @@ public class Decider {
         return positionToPlay;
     }
 
-    public int block(AIPlayer aiPlayer){
-        return -1;
+    public int blockOpponent(AIPlayer aiPlayer){
+        int positionToBlock = 9;
+        for(int i=0; i<board.winConditions.length; i++){
+            for(int j=0; j<board.winConditions[i].length; j++){
+                if(
+                        board.gameBoard.get(board.winConditions[i][(j+1) % board.winConditions[i].length]) ==
+                                board.gameBoard.get(board.winConditions[i][(j+2)%board.winConditions[i].length]) &&
+
+                                board.gameBoard.get(board.winConditions[i][(j+1) % board.winConditions[i].length]) !=
+                                        aiPlayer &&
+
+                                board.gameBoard.get(board.winConditions[i][(j+1) % board.winConditions[i].length]) !=
+                                        null
+                        )
+                {
+                    positionToBlock = board.winConditions[i][j];
+                }
+            }
+        }
+        return positionToBlock;
     }
 }
