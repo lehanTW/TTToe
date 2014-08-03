@@ -15,6 +15,8 @@ public class Board {
             {1,2,3},{1,4,7},{7,8,9},{3,6,9},{1,5,9},{3,5,7},{4,5,6},{2,5,8}
     };
 
+    protected final int[] corners = new int[] {1, 3, 7, 9};
+
     private void setUpGameBoard(){
         for(int i=0; i<=9; i++) {
             gameBoard.add(null);

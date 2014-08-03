@@ -43,7 +43,7 @@ public class Decider {
     }
 
     public int blockOpponent(AIPlayer aiPlayer){
-        int positionToBlock = 9;
+        int positionToBlock = -1;
         for(int i=0; i<board.winConditions.length; i++){
             for(int j=0; j<board.winConditions[i].length; j++){
                 if(
@@ -62,5 +62,11 @@ public class Decider {
             }
         }
         return positionToBlock;
+    }
+
+    public int fork(AIPlayer aiPlayer1) {
+        int positionToBlock = -1;
+
+        return 7;
     }
 }

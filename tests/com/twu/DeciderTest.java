@@ -74,15 +74,24 @@ public class DeciderTest {
         assertThat(decider.blockOpponent(aiPlayer1), is(5));
     }
 
-/*
     @Test
-    public void shouldMakeWinningPlayAtPosition3(){
-        Board localBoard = new Board(out);
-        AIPlayer localPlayer = new AIPlayer(localBoard, "X");
+    public void shouldForkAtPosition7(){
+        board.gameBoard.add(1,aiPlayer1);
+        board.gameBoard.add(3,aiPlayer1);
 
-
+        assertThat(decider.fork(aiPlayer1), is(7));
     }
-*/
+
+   @Test
+    public void shouldForkAtPosition9(){
+        board.gameBoard.add(3,aiPlayer1);
+        board.gameBoard.add(7,aiPlayer1);
+
+        board.gameBoard.add(2,aiPlayer2);
+        board.gameBoard.add(5,aiPlayer2);
+
+        assertThat(decider.fork(aiPlayer1), is(9));
+    }
 
 
 }
